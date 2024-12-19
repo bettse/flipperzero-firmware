@@ -171,7 +171,7 @@ static bool skylanders_parse(const NfcDevice* device, FuriString* parsed_data) {
         uint64_t key = bit_lib_bytes_to_num_be(sec_tr->key_a.data, 6);
         if(key != skylanders_key) break;
 
-        const uint16_t id = (uint16_t)*data->block[1].data;
+        const uint16_t id = data->block[1].data[1] << 8 | data->block[1].data[0];
         if(id == 0) break;
 
         Storage* storage = furi_record_open(RECORD_STORAGE);
